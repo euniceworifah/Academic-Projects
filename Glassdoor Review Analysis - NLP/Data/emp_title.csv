@@ -1,0 +1,646 @@
+employee_title,domain
+ Driver ,Admin
+ Security Guard,Admin
+ Junior Welder,Admin
+ Medical Receptionist,Admin
+ Hostess,Admin
+ Cleaner,Admin
+ Executive Janitorial Assistant,Admin
+ Executive Assistant,Admin
+ General Labourer,Admin
+ General Laborer,Admin
+ Clerk,Admin
+ Administrative Assistant,Admin
+ Facility Manager,Admin
+ Leasing Agent,Admin
+ Executive Chef,Admin
+ Apple Specialist ,Admin
+ Technical Support,Admin
+ Apple Technical Specialist,Admin
+ Phone Operator,Admin
+ Expert,Admin
+ Tech Support,Admin
+ Genius,Admin
+ Mailman,Admin
+ Janitor,Admin
+ Family Room Specialist,Admin
+ Waitress,Admin
+ Technical Support Specialist,Admin
+ Runner,Admin
+ Watcher,Admin
+ Technical Support Agent,Admin
+ Senior Site Reliability Engineer,Admin
+ Facilities Coordinator,Admin
+ Assistant,Admin
+ Labourer,Admin
+ Worker,Admin
+ Unemployed,Admin
+ Support Worker,Admin
+ Child Care Worker,Admin
+ Facilities Technician,Admin
+ Support Specialist,Admin
+ Fresher,Admin
+ Individual Contributor,Admin
+ Master Plumber,Admin
+ Personal Assistant,Admin
+Anonymous,Admin
+ Sub,Admin
+ Box manager,Admin
+ N/A,Admin
+ Driver,Admin
+ Non,Admin
+ Mcdonalds Crew Member,Admin
+ Critical Facility Engineer,Admin
+ Security Engineer,Admin
+ FRS,Admin
+ Nursing Student,Admin
+ OTX,Admin
+ MSC,Admin
+ Spécialiste,Admin
+ In,Admin
+ Mathematics Teacher,Admin
+" ""Delegado comercial, área internacional""",Admin
+ NONE,Admin
+ Family Service Counselor,Admin
+ Anonymous,Admin
+ Camera Rental House Tech,Admin
+ Actor,Admin
+ No Name,Admin
+ AIG,Admin
+ Solutions Architect,Analytics
+ Data Analyst,Analytics
+ Analyst,Analytics
+ Alexa Data Services,Analytics
+ Data Scientist,Analytics
+ ML Data Associate,Analytics
+ Programmer Analyst,Analytics
+ Quest Designer,Analytics
+ Business Analyst,Analytics
+ Data Engineer,Analytics
+ ML Data Associate II,Analytics
+ Principal Solutions Architect,Analytics
+ Research Scientist,Analytics
+ Data Science,Analytics
+ Client Solutions Manager,Analytics
+ Computer Science,Analytics
+ Solutions Engineer,Analytics
+ Visiting Researcher,Analytics
+ Machine Learning Engineer,Analytics
+ Data Science Manager,Analytics
+ Partner Solutions Manager,Analytics
+ Advanced Business Analyst,Analytics
+ Senior Applied Scientist,Analytics
+ Digital Analyst,Analytics
+ Senior Data Scientist,Analytics
+ Architect,Analytics
+ Analyst/In,Analytics
+ Technical Solutions Engineer,Analytics
+ Analytical Lead,Analytics
+ Data,Analytics
+ Senior Analyst,Analytics
+ Database Manager,Analytics
+ Senior Data Engineer,Analytics
+ Software Engineer (Machine Learning),Analytics
+ Transaction Risk Investigator (TRMS),Finance
+ Account Executive,Finance
+ Financial Analyst,Finance
+ Advertising Account Manager,Finance
+ Enterprise Account Executive,Finance
+ Senior Account Manager,Finance
+ Key Account Manager,Finance
+ Accountant,Finance
+ Accounts Payable,Finance
+ Finance,Finance
+ Account Director,Finance
+ Commission Manager,Finance
+" Manager, Financial Planning & Analysis",Finance
+ Finance Operations Associate,Finance
+ Financial Service Representative ,Finance
+ Strategic Account Manager,Finance
+ Account Strategist,Finance
+ Senior Accounts Manager,Finance
+ Financial Service Representative,Finance
+ Senior Account Executive,Finance
+ Senior Technical Account Manager,Finance
+ Sales Account Manager,Finance
+ Associate Account Strategist,Finance
+ Senior Account Strategist,Finance
+ Account Strategists,Finance
+ Human Resources Business Partner HRBP,HR
+ Technical Recruiter,HR
+ Technical Recruiter II,HR
+ Human Resources Assistant,HR
+ Human Resources Administrator,HR
+ Human Resources,HR
+ Recruiting Manager,HR
+ Senior HRA,HR
+ Senior Human Resources Business Partner,HR
+ Technical Sourcer,HR
+ Recruiter,HR
+ Senior Technical Recruiter,HR
+ Benefits Representative,HR
+ People Operations Planner,HR
+ Human Resources Technology,HR
+ Talent Sourcer,HR
+ Recruiting Coordinator,HR
+ Generalist,HR
+ Workplace Manager,HR
+ Workplace leader,HR
+ Labor Relations Coordinator,HR
+ Talent Coordinator,HR
+ Human Resources Specialist,HR
+ People Partner,HR
+ Legal Project Manager,Legal
+ Legal Counsel,Legal
+ Legal,Legal
+ Public Policy Director,Legal
+ Privacy Operations Specialist,Legal
+ Public Policy Manager,Legal
+ Associate General Counsel,Legal
+ Senior Counsel,Legal
+ Corporate Escalations Specialist,Legal
+ Legal Investigations Associate,Legal
+ Public Policy,Legal
+ Legal Specialist,Legal
+ Senior Marketing Manager,Marketing
+ Marketing Manager,Marketing
+ Marketing,Marketing
+ MARKETING ANALYSIS,Marketing
+ Content Designer,Marketing
+ Head of Communications,Marketing
+ Marketing Science Partner,Marketing
+ Market Specialist,Marketing
+ Growth Manager,Marketing
+ Marketing Coordinator,Marketing
+ Editor,Marketing
+ Growth Marketing Manager,Marketing
+ Social Media Manager,Marketing
+ Product Marketing Manager,Marketing
+ Content Manager,Marketing
+ Product Growth Analyst,Marketing
+ Marketing Specialist,Marketing
+ Publicist,Marketing
+ Content Creator,Marketing
+ Casting Assistant,Marketing
+ Director Marketing,Marketing
+ Marketing Director,Marketing
+ Digital Strategist,Marketing
+ Reviewer,Marketing
+ Marketing Assistant,Marketing
+" Manager, Programmatic Marketing",Marketing
+ Media Analyst,Marketing
+ Event Manager,Marketing
+ Digital Marketing,Marketing
+ Head of Growth,Marketing
+ Social Media Intern,Marketing
+ Digital Marketing Specialist,Marketing
+ Media Ad Campaign Manager,Marketing
+ Ad Sales,Marketing
+ Adwords Associate,Marketing
+ Marketer,Marketing
+ Associate Ad Manager,Marketing
+ Script Coordinator,Marketing
+ Creative Assistant,Marketing
+ Dresser,Marketing
+ Writer’s PA,Marketing
+ Producer,Marketing
+ Video Editor,Marketing
+ Program Manager,Operations
+ Virtual Ops Support,Operations
+ Process Assistant,Operations
+ Specialist,Operations
+ Business Administration,Operations
+ Process Associate,Operations
+ Senior Program Manager,Operations
+ Operations Manager,Operations
+ Customer Service Representative,Operations
+ Operations,Operations
+ Project Manager,Operations
+ Process Guide,Operations
+ Manager,Operations
+ Operations Manager I,Operations
+ Business Applications Manager,Operations
+ Business Operations Manager,Operations
+ Whs Specialist,Operations
+ Staffing Coordinator,Operations
+ Assistant Manager,Operations
+ Safety Coordinator,Operations
+ Investigator,Operations
+ Senior Associate,Operations
+ Amazon Associate Tier I,Operations
+ Director of Operations,Operations
+ Operation Lead,Operations
+ Amazon Process Assistant,Operations
+ Associate Director,Operations
+ Director,Operations
+ Community Operations Analyst,Operations
+ Client Partner,Operations
+ Partner Manager,Operations
+ Global Program Manager,Operations
+ Partnership Manager,Operations
+ Operations Specialist,Operations
+ Strategist,Operations
+ Strategic Partner Manager,Operations
+ Business Lead,Operations
+ Facebook,Operations
+ Lead,Operations
+ MBA Student,Operations
+ Schedule Planner,Operations
+ President &CEO,Operations
+ Senior Project Manager,Operations
+ Operations Expert,Operations
+ Former Employee,Operations
+ Ops Manager,Operations
+ Business Program Manager,Operations
+ Corporate,Operations
+ Manager Operations,Operations
+ Strategy Manager,Operations
+ Project Coordinator,Operations
+ Strategy Planner,Operations
+ Diretor,Operations
+ Technical Operations Manager,Operations
+ Operations Assistant,Operations
+ Senior Director,Operations
+ Operations Supervisor,Operations
+ Senior Manager,Operations
+ Civil Engineer,Operations
+ Job Captain,Operations
+ Chief,Operations
+ Management Trainee,Operations
+ Entrepreneur,Operations
+ Head of Industry,Operations
+ General Manager,Operations
+ Sales Operations Manager,Operations
+ Industry Manager,Operations
+ Leader,Operations
+ Operations Associate,Operations
+ Lead Client Partner Leader,Operations
+ President,Operations
+ Associate,Operations
+ Associate I,Operations
+ Problem Solver,Operations
+ G&amp;A,Operations
+ 3D Visual Artist,Product
+ Art Director,Product
+ Product Experience Analyst,Product
+ Product Management,Product
+ Product Design Prototyper,Product
+ Product Specialist,Product
+ Creative Pro,Product
+ Freelance Video Editor,Product
+ Product Zone Specialist,Product
+ Creative,Product
+ Spécialist,Product
+ Costume Coordinator,Product
+ Language and Localization Specialist,Product
+ Localization Program Manager,Product
+ Film Director,Product
+ Musician,Product
+ Localization Manager,Product
+ First Assistant Editor,Product
+ Creative Director,Product
+ Artist,Product
+ Senior User Experience Designer,Product
+ Director Product,Product
+ Senior User Experience Researcher,Product
+ Visual Designer,Product
+ Senior Product Designer,Product
+ Storyboard Artist,Product
+ Storyboard Revisionist,Product
+ Senior UI Engineer,Product
+ Lead Creative,Product
+ Scanner,Product
+ Localization Project Manager,Product
+ Product,Product
+ Designer,Product
+ User Experience Engineer,Product
+ UI/User Experience Designer,Product
+ Senior Product Manager,Product
+ User Experience Writer,Product
+ Product Operations Manager,Product
+ Product Engineer,Product
+ Quantitative User Experience Researcher,Product
+ Associate Product Manager,Product
+" Senior Manager, Product Management",Product
+ User Experience Researcher,Product
+ Product Designer,Product
+ Front End Engineer,Product
+ Product Manager,Product
+ Design Engineer,Product
+ Lead Development Representative,Sales
+ BDR,Sales
+" Senior Manager, Business Development",Sales
+ Business Development Manager,Sales
+ Strategic Partner Development Manager,Sales
+ Partner Success Manager,Sales
+ Business Development Representative,Sales
+ Sales Associate,Sales
+ Sales Associate,Sales
+ Partner Sales Manager,Sales
+ Sales Representative,Sales
+ Inbound Receiving Process Guide,Sales
+ Inbound Associate,Sales
+ Sales,Sales
+ Inbound Stow,Sales
+ Account Manager,Sales
+ Sales Area Manager,Sales
+ Acoount Executive,Sales
+ CustomerService Representative,Sales
+ Customer Service Representative (CSR),Sales
+ Customer Service Manager,Sales
+ Sales Manager,Sales
+ Facebook Sales,Sales
+ Customer Success Manager (CSM),Sales
+ Customer Service,Sales
+ Sales Program Manager,Sales
+ Director of Client Services,Sales
+ Lead Genius,Sales
+ Genius Bar Technician,Sales
+ Technician,Sales
+ Apple Genius,Sales
+ Mac Specialist (Apple Store),Sales
+ Genius Administrator,Sales
+ Apple Certified Mac Technician,Sales
+ Apple Retail Specialist,Sales
+ Sales Associate/Cashier,Sales
+ BOH Specialist,Sales
+ Sales Expert,Sales
+ Retail Sales Representative,Sales
+ Sale Associate,Sales
+ Sales Specialist,Sales
+ Apple At Home Advisor,Sales
+ Genius Administrative,Sales
+ Cashier,Sales
+ Technical Expert,Sales
+ Mac Genius,Sales
+ Customer Service Specialist,Sales
+ Home Service,Sales
+ Retail Sales Associate,Sales
+ At Home Customer Service Representative,Sales
+ Salesman,Sales
+ Store Manager,Sales
+ Red Zone Specialist,Sales
+ Apple Pro,Sales
+ genious,Sales
+ Pro,Sales
+ Technology and Merchandising Pro,Sales
+ CSR,Sales
+ Costumer Service Representative,Sales
+ Customer Representative,Sales
+ CUTOMER SERVICE Representative,Sales
+ Customer Support Representative,Sales
+ Customer Support Agent,Sales
+ Customer Service Associate (CSA),Sales
+ Call Center Customer Service Representative,Sales
+ Vendor Manager,Sales
+ Cs Representative,Sales
+ Customer Service Supervisor,Sales
+ Customer Service Representative I,Sales
+ Agent,Sales
+ Retail Manager,Sales
+ Brand Ambassador,Sales
+ Customer Engineer,Sales
+ Senior Sales Engineer,Sales
+ Senior Sales Executive,Sales
+ Sales Engineer,Sales
+ Front End Cashier,Sales
+ Client Service Admisntrator,Sales
+ Senior Vendor Manager,Sales
+ Technical Support Representative,Sales
+ TSR,Sales
+ CSR 1,Sales
+ Warehouse Associate,Supply Chain
+ Warehouse Worker,Supply Chain
+ Supervisor,Supply Chain
+ FC Associate I,Supply Chain
+ Amazon Area Manager,Supply Chain
+ Picker,Supply Chain
+ Warehouse Process Guide,Supply Chain
+ Area Manager Intern,Supply Chain
+ Stower,Supply Chain
+ Fulfillment Associate,Supply Chain
+ Area Manager,Supply Chain
+ Logistics Associate,Supply Chain
+ Senior Procurement Specialist,Supply Chain
+ Werehouse Operative,Supply Chain
+ Order Picker,Supply Chain
+ Amazon Fulfillment Associate,Supply Chain
+ Ware House Associate,Supply Chain
+ Tier III Process Assistant,Supply Chain
+ Amazon (Fulfillement Center) Associate,Supply Chain
+ FC Associate,Supply Chain
+ Seasonal Sortation Associate,Supply Chain
+ Wharehouse Worker,Supply Chain
+ Amazon Sortation Associate,Supply Chain
+ Area Manager II,Supply Chain
+ Sorter,Supply Chain
+ Amazon Warehouse Worker,Supply Chain
+ Warehuse Associate,Supply Chain
+ Delivery Driver,Supply Chain
+ Station Manager,Supply Chain
+ Amazon Fc Associate,Supply Chain
+ Lead Fulfilment Associate,Supply Chain
+ Amazon Seasonal Associate,Supply Chain
+ FC Associate (Tier I),Supply Chain
+ Seasonal Warehouse Associate,Supply Chain
+ Fullilment Associate,Supply Chain
+ Sortation Associate,Supply Chain
+ Warehouse Associate Picker,Supply Chain
+ Pick and Pack Order,Supply Chain
+ Order Fulfillment Associate,Supply Chain
+ Picker/Packer,Supply Chain
+ Inventory Associate,Supply Chain
+ Amazon Associate,Supply Chain
+ Warehouse Picker,Supply Chain
+ Fulfillment Associate/Problem Solver (IOL) Associate,Supply Chain
+ Picking and Packing,Supply Chain
+ Part Time Package Handler,Supply Chain
+ Shipping and Receiving,Supply Chain
+ Order Pickers,Supply Chain
+ Amazon Warehouse Associate,Supply Chain
+ Warehouse ambassador,Supply Chain
+ PACKAGE HANDLER/SORTER,Supply Chain
+" Stower, Packer, Receiver",Supply Chain
+ Fufillment Associate,Supply Chain
+ Warehouse Fullfilment Associate,Supply Chain
+ Sorting Associate,Supply Chain
+ FC1 Associate,Supply Chain
+ Customer Returns Processor,Supply Chain
+ Seasonal Fulfillment Associate,Supply Chain
+ Field Transportation Specialist,Supply Chain
+ Assistant Shift Manager,Supply Chain
+ Fulfillment Associate Ambassdor,Supply Chain
+ Walmart Logistic Canada,Supply Chain
+ Filfilment Wearhouse Associate,Supply Chain
+ Lead Fulfillment Associate,Supply Chain
+ Material Handler,Supply Chain
+ Maintenance Supervisor,Supply Chain
+ Packaging,Supply Chain
+ Pivker and Packer,Supply Chain
+ Warehouse Operative,Supply Chain
+ Inventory Specialist,Supply Chain
+ Quality Control,Supply Chain
+ Import Specialist,Supply Chain
+ Goods Flow Co,Supply Chain
+ Returns Processor,Supply Chain
+ FC Associate Tier I,Supply Chain
+ Production Assistant,Supply Chain
+ Production Coordinator,Supply Chain
+ Production Supervisor,Supply Chain
+ Production Manager,Supply Chain
+" Manager, Physical Production",Supply Chain
+ Physical Production Coordinator,Supply Chain
+ Line Producer,Supply Chain
+ Production Engineer Co,Supply Chain
+ Production Support Engineer,Supply Chain
+ Production Engineer,Supply Chain
+ Software Engineer II,Technology
+ Software Development Engineer II,Technology
+ Software Development Engineer,Technology
+ Software Development Engineer (SDE) I,Technology
+ Software Engineer,Technology
+ Software Development Engineer (SDE),Technology
+ Software Development Engineer (SDE) II,Technology
+ Quality Engineer,Technology
+ Software Developer,Technology
+ Software Development Engineer I,Technology
+ CS Senior,Technology
+ Assistant Digital Investment,Technology
+ Software Engineer II SDE2,Technology
+ Software Development Engineer In Test (SDET),Technology
+ Amazon Software Development Engineer,Technology
+ Applications Developer,Technology
+ Software Developer Engineer Intern,Technology
+ IT Equipment Coordinator,Technology
+ Software Engineer I,Technology
+ Systems Engineer,Technology
+ SDE2,Technology
+ IT Support Technician,Technology
+ Software Developer Engineer II,Technology
+ Ndt Technician,Technology
+ Engineer,Technology
+ Software Engineer(Internship),Technology
+ Software Development Manager,Technology
+ Junior Software Developer,Technology
+ Support Engineer II,Technology
+ Senior Software Developer,Technology
+ Software Development Engineer Intern,Technology
+ Senior Software Engineer,Technology
+ Systems Development Engineer,Technology
+ Developer,Technology
+ Senior Technical Program Manager,Technology
+ Software Development Engineer (SDE) Intern,Technology
+ SDE,Technology
+ SDEII Full Stack Engineer,Technology
+ Salesforce Administrator,Technology
+ Software Enginerring Analyst,Technology
+ Quality Assurance Enginner,Technology
+ Devops Engineer,Technology
+ Enginerring,Technology
+ Research Engineer,Technology
+" Program Management and Analysis, Software Engineering",Technology
+ Engineering Manager,Technology
+ IT Recruiter,Technology
+ Network Engineer Deployment and Support,Technology
+ Safety Investigator,Technology
+ Firmware Engineer,Technology
+ Rotational Software Engineer,Technology
+ Senior Swe,Technology
+ Telecommunications Engineer,Technology
+ Senior IOS Developer,Technology
+ Software Engineering Intern,Technology
+ Software Test Engineer,Technology
+ SWE Manager,Technology
+ Network Engineer,Technology
+ Developer Advocate,Technology
+ Software Engineer Intern,Technology
+ Engineering Director,Technology
+ Technical Program Manager,Technology
+ Senior Developer,Technology
+ Facebook Software Engineer,Technology
+ Engineering,Technology
+ Hardware Analyst,Technology
+ Mobile Engineer,Technology
+ SWE,Technology
+ Enterprise Support Tech,Technology
+ SWE Intern,Technology
+ Electrical Engineer,Technology
+ Computer Programmer II,Technology
+ Software Engineering Manager,Technology
+ Technical Specialist,Technology
+ Project Management Information Systems (Pmis),Technology
+ IT Technician,Technology
+ Senior Technical Expert,Technology
+ IOS Tier I Advisor,Technology
+ Information Technology,Technology
+ Technical Services Manager,Technology
+ Computer Engineer,Technology
+ Intern,Technology
+ Innovation Manager,Technology
+ IOS Developer,Technology
+ Tech,Technology
+ Technician Specialist,Technology
+ Tech Specialist,Technology
+ Technical Designer,Technology
+ Full Stack Developer,Technology
+ TEC Expert,Technology
+ Technical Research Manager,Technology
+ Systems Administrator,Technology
+ Senior Systems Engineer,Technology
+ Tech Ops Specialist,Technology
+ CS1,Technology
+ Director of Engineering,Technology
+ Backend Developer,Technology
+ Project Engineer,Technology
+ VFX Editor,Technology
+ Technical Research Analyst,Technology
+ Summer Inter,Technology
+ Manager of Technical Services,Technology
+ Technical Research Assistant,Technology
+ Csr1,Technology
+ Senior Software Test Engineer,Technology
+ Curriculum Developer,Technology
+ Technical Research Supervisor,Technology
+ Senior Software Engineering Manager,Technology
+ Tier III/Technical Research Analyst,Technology
+ Senior Security Engineer,Technology
+ CSR2,Technology
+ Team Leader,Technology
+ Staff Software Engineer,Technology
+ Staff Software Developer,Technology
+ Google Engineering Practicum,Technology
+ Quality Analyst,Technology
+ Software,Technology
+ Research Intern,Technology
+ Intern ,Technology
+ Web Developer,Technology
+ Software Enguneer,Technology
+ Google SWE,Technology
+ Front End Developer,Technology
+ Computer Programmer,Technology
+ Programmer,Technology
+ Junior Software Engineer,Technology
+ QA Analyst,Technology
+ Software Engineer III,Technology
+ Technical Program Manager II,Technology
+ Desktop Support Engineer,Technology
+ PHP Trainee,Technology
+ Vice President Engineering,Technology
+ Research Associate,Technology
+ Research Assistant,Technology
+ Senior AV Engineer,Technology
+ Head of Search,Technology
+ IT Applications Programmer,Technology
+ Associate Software Engineer,Technology
+ Hardware Engineer,Technology
+ Staff Engineer,Technology
+ Senior Network Engineer,Technology
+ Computer Operator,Technology
+ Software Engineering Director,Technology
+ Researcher,Technology
+ Google Applications Deployment Engineer,Technology
+ Student,Technology
+ Technical Writer,Technology
+ Manufacturing Test Engineer,Technology
+ PhD Student,Technology
+ Google Specialist,Technology

@@ -1,0 +1,1695 @@
+CREATE DATABASE DB_FINALPROJECT;
+USE DB_FINALPROJECT;
+/* CREATE DONOR TABLE
+CONTAINS INFORMATION NEEDED TO IDENTIFY INDIVIDUALS OR ORGANIZATIONS REGISTERED AS CAMPAIGN DONORS */
+CREATE TABLE IF NOT EXISTS DONOR(
+  DONOR_ID VARCHAR(10) NOT NULL, 
+  DONOR_FIRSTNAME VARCHAR(50) NOT NULL,
+  DONOR_LASTNAME VARCHAR(50) NOT NULL, 
+  DONOR_PHONE VARCHAR(50) NOT NULL, 
+  DONOR_EMAIL VARCHAR(50) NOT NULL,  
+  DONOR_AGE INT, 
+  DONOR_GENDER VARCHAR(10), 
+  DONOR_CITY VARCHAR(50) NOT NULL, 
+  DONOR_COUNTRY VARCHAR(50) NOT NULL, 
+  DONOR_ZIPCODE VARCHAR(50) NOT NULL, 
+  DONOR_INCOME INT  NULL,  
+  DONOR_PASSWORD VARCHAR(50) NOT NULL, 
+  DONOR_ACCOUNT_STATUS VARCHAR(50) NOT NULL, 
+  PRIMARY KEY (`DONOR_ID`)
+  );
+
+/* CREATE ORGANIZER TABLE
+CONTAINS INFORMATION NEEDED TO IDENTIFY INDIVIDUALS OR ORGANIZATIONS REGISTERED AS CAMPAIGN ORGANIZERS*/
+CREATE TABLE IF NOT EXISTS ORGANIZER(
+  ORG_ID VARCHAR(10) NOT NULL, 
+  ORG_FIRSTNAME VARCHAR(50) NOT NULL, 
+  ORG_LAST_NAME VARCHAR(50)NOT NULL,  
+  ORG_COMPANY VARCHAR(50)NOT NULL, 
+  ORG_PHONE VARCHAR(50)NOT NULL, 
+  ORG_EMAIL VARCHAR(50)NOT NULL, 
+  ORG_CITY VARCHAR(50)NOT NULL, 
+  ORG_COUNTRY VARCHAR(50)NOT NULL, 
+  ORG_ZIPCODE VARCHAR(50)NOT NULL, 
+  ORG_REGDATE DATE NOT NULL, 
+  ORG_PASSWORD VARCHAR(100) NOT NULL, 
+  ORG_ACC_STATUS INTEGER NOT NULL,
+  PRIMARY KEY (`ORG_ID`)
+  );
+  
+/* CREATE CAMPAIGN_LIST TABLE
+CONTAINS INFORMATION DETAILING INDIVIDUAL FUNDRAISING CAMPAIGNS*/
+CREATE TABLE IF NOT EXISTS CAMPAIGN_LIST (
+    CAMP_ID VARCHAR(10) NOT NULL,
+    CAMP_POST_DATE DATE NOT NULL,
+    CAMP_END_DATE DATE NOT NULL,
+    CAMP_DESCP VARCHAR(200) NOT NULL,
+    CAMP_STATUS INT NOT NULL,
+    CAMP_TYPE VARCHAR(50) NOT NULL,
+    CAMP_GOALAMOUNT INT NULL,
+    TIME_REQUIRED INT NULL,
+    CAMP_PRIORITY VARCHAR(50) NOT NULL,
+    ORG_ID VARCHAR(10),
+    PRIMARY KEY (`CAMP_ID`),
+    FOREIGN KEY (`ORG_ID`)
+        REFERENCES ORGANIZER (ORG_ID)
+);
+
+/* CREATE DONOR BANKDETAILS TABLE
+CONTAINS BANK INFORMATION NECESSARY FOR THE DONOR TO TO PAY CAMPAIGN FUNDS*/
+CREATE TABLE IF NOT EXISTS `DONOR_BANKDETAILS` (
+    `DONOR_BANKID` VARCHAR(10) NOT NULL,
+    `DONOR_BANKNAME` VARCHAR(50) NOT NULL,
+    `DONOR_ACCOUNT` VARCHAR(50) NOT NULL,
+    `DONOR_SWIFTCODE` VARCHAR(50),
+    `DONOR_ID` VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`DONOR_BANKID`),
+    FOREIGN KEY (`DONOR_ID`)
+        REFERENCES DONOR(DONOR_ID)
+);
+
+
+/* CREATE ORGANIZER_BANKDETAILS TABLE
+CONTAINS BANK INFORMATION NECESSARY FOR THE ORGANIZER TO RECEIVE CAMPAIGN FUNDS */
+CREATE TABLE IF NOT EXISTS ORGANIZER_BANKDETAILS (
+    ORG_BANKID VARCHAR(10),
+    ORG_BANK_NAME VARCHAR(50),
+    ORG_ACCOUNT VARCHAR(50) NULL,
+    ORG_SWIFTCODE VARCHAR(50),
+    ORG_ID VARCHAR(10),
+    PRIMARY KEY (`ORG_BANKID`),
+    FOREIGN KEY (`ORG_ID`)
+        REFERENCES ORGANIZER(ORG_ID)
+);
+
+/* CREATE CATEGORY TABLE
+CONTAINS DIFFERENT CATEGORY ON WHICH THE CAMPAIGN BELONGS TO */
+CREATE TABLE `CATEGORY` (
+  `CATEGORY_ID` VARCHAR(10) NOT NULL,
+  `CATEGORY_TITLE` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`CATEGORY_ID`)
+);
+
+/* CREATE CAMPAIGN_CATEGORY TABLE
+MATCHING THE CAMAPIGN WITH THE CATEGORIES IT IS ASSOCIATED TO*/
+CREATE TABLE `CAMPAIGN_CATEGORY` (
+    `CAMP_ID` VARCHAR(10) NOT NULL,
+    `CATEGORY_ID` VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`CAMP_ID` , `CATEGORY_ID`),
+    FOREIGN KEY (`CAMP_ID`)
+        REFERENCES CAMPAIGN_LIST (`CAMP_ID`),
+    FOREIGN KEY (`CATEGORY_ID`)
+        REFERENCES CATEGORY (`CATEGORY_ID`)
+);
+
+
+/* CREATE VOLUNTEER_TRANSACTION TABLE
+CONTAINS DATA ON VOLUNTEER TRANSACTIONS MADE BY DONORS TO VOLUNTEER CAMPAIGNS */
+CREATE TABLE IF NOT EXISTS VOLUNTEER_TRANSACTION (
+    VOLUNTEER_ID VARCHAR(10) NOT NULL,
+    TIME_COMMITTED INTEGER NOT NULL,
+    TIME_WORKED INTEGER NOT NULL,
+    VOLUNTEER_STATUS INTEGER NOT NULL,
+    DONOR_ID VARCHAR(10) NOT NULL,
+    CAMP_ID VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`VOLUNTEER_ID`),
+    FOREIGN KEY (`CAMP_ID`)
+        REFERENCES CAMPAIGN_LIST (`CAMP_ID`),
+    FOREIGN KEY (`DONOR_ID`)
+        REFERENCES DONOR (`DONOR_ID`)
+);
+
+/* CREATE  DONOR_TRANSACTION TABLE
+CONTAINS FINANCIAL DATA ON TRANSACTIONS MADE FROM DONORS TO CAMPAIGNS*/
+CREATE TABLE IF NOT EXISTS DONOR_TRANSACTION (
+    TRANS_ID VARCHAR(10) NOT NULL,
+    TRANS_TIMESTAMP TIMESTAMP NOT NULL,
+    TRANS_PAYMENTID VARCHAR(50) NOT NULL,
+    TRANS_PAYMENTMODE VARCHAR(50) NOT NULL,
+    TRANS_PAYMENTSTATUS VARCHAR(50) NOT NULL,
+    TRANS_AMOUNT DECIMAL(10 , 2 ) NOT NULL,
+    CAMP_ID VARCHAR(10) NOT NULL,
+    DONOR_ID VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`TRANS_ID`),
+    FOREIGN KEY (`CAMP_ID`)
+        REFERENCES CAMPAIGN_LIST (`CAMP_ID`),
+    FOREIGN KEY (`DONOR_ID`)
+        REFERENCES DONOR (`DONOR_ID`)
+);
+
+/* CREATE PREFERENCE_CATEGORY TABLE
+ MATCHING THE DONOR WITH RESPECTIVE PREFERRED CATEGORIES HE/SHE IS ASSOCIATED TO*/
+CREATE TABLE IF NOT EXISTS PREFERENCE_CATEGORY(
+  CATEGORY_ID VARCHAR(10) NOT NULL, 
+  DONOR_ID VARCHAR(10) NOT NULL,
+    PRIMARY KEY (`DONOR_ID` , `CATEGORY_ID`),
+    FOREIGN KEY (`DONOR_ID`)
+        REFERENCES DONOR (`DONOR_ID`),
+    FOREIGN KEY (`CATEGORY_ID`)
+        REFERENCES CATEGORY (`CATEGORY_ID`)
+);
+
+/* INSERTING THE DATA TO DONOR TABLE */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D001', 'Ludwig', 'Mates', '600-747-3248', 
+    'lmates0@utexas.edu', 18, 'M', 'Buenos Aires', 
+    'Argentina', 1723, 71938, '04FF1J', 
+    1
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D002', 'Palm', 'Worsfield', '746-332-0218', 
+    'pworsfield1@rediff.com', 57, 'M', 
+    'Dhaka', 'Bangladesh', 1209, 150321, 
+    'bxJN8HKFqHK8', 1
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D003', 'Michal', 'Matitiaho', '525-339-2089', 
+    'mmatitiaho2@fda.gov', 20, 'M', 'Montreal', 
+    'Canada', 'H3A0E5', 143523, '2wpYVznikkq', 
+    1
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D004', 'Valida', 'Wilshaw', '172-137-4807', 
+    'vwilshaw3@icq.com', 34, 'F', 'Beijing', 
+    'China', 100006, 165590, 'gcuUSFFH4e', 
+    0
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D005', 'Clim', 'Risborough', '649-804-5815', 
+    'crisborough4@mashable.com', 80, 
+    'M', 'Nassau', 'Bahamas', 0, 104580, 
+    'kXtDACsDnaKe', 0
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D006', 'Bryn', 'Newbold', '209-826-4217', 
+    'bnewbold5@netscape.com', 25, 'M', 
+    'Paris', 'France', 75006, 264691, 
+    'ysw9YIT44', 1
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D007', 'Betsy', 'Will', '233-880-3731', 
+    'bwill6@twitter.com', 43, 'F', 'New York', 
+    'USA', 10005, 136902, '55NZgcIrTc', 
+    1
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D008', 'Griswold', 'McKelvey', '983-679-4556', 
+    'gmckelvey7@disqus.com', 75, 'M', 
+    'Toronto', 'Canada', 'M4V0H1', 238640, 
+    'NqS669hssGb', 0
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D009', 'Bertrando', 'Ruddiforth', 
+    '786-360-9242', 'bruddiforth8@sfgate.com', 
+    38, 'F', 'Boston', 'USA', 2111, 276651, 
+    'YmyUXY2YAXP', 0
+  );
+/* INSERT QUERY */
+INSERT INTO donor(
+  donor_id, donor_firstname, donor_lastname, 
+  donor_phone, donor_email, donor_age, 
+  donor_gender, donor_city, donor_country, 
+  donor_zipcode, donor_income, donor_password, 
+  donor_account_status
+) 
+VALUES 
+  (
+    'D010', 'Debora', 'Richemond', '770-108-9340', 
+    'drichemond9@livejournal.com', 
+    49, 'F', 'Busan', 'South Korea', '600-022', 
+    29055, 'lHfrdXZXmQO', 1
+  );
+  
+  
+/* INSERTING THE DATA TO ORGANIZER TABLE */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR001', 'Fallon', 'Ugolotti', 'Jabbertype', 
+    '444-174-8644', 'fugolotti0@quantcast.com', 
+    'Tokyo', 'Japan', 1230, '2017-11-06', 
+    'x8RD4j', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR002', 'Merl', 'Jacquemy', 'Wordify', 
+    '903-336-0135', 'mjacquemy1@squidoo.com', 
+    'Delhi', 'India', 59500, '2017-08-29', 
+    'J6cXM8vt', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR003', 'Sauncho', 'Sor', 'Edgewire', 
+    '716-537-0516', 'ssor2@clickbank.net', 
+    'Shanghai', 'China', 39180, '2020-05-27', 
+    'kz4uhXqKAM', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR004', 'Tommie', 'Rusted', 'Meetz', 
+    '168-316-4046', 'trusted3@tumblr.com', 
+    'Mexico City', 'Mexico', 5464, '2018-11-12', 
+    'haxexDz', 0
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR005', 'Allayne', 'Alabaster', 'Viva', 
+    '374-394-8243', 'aalabaster4@stumbleupon.com', 
+    'Los Angeles', 'USA', 90210, '2018-10-01', 
+    'l0KZk1o9V', 0
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR006', 'Krystyna', 'Isley', 'Eidel', 
+    '586-363-5113', 'kisley5@google.co.uk', 
+    'Mumbai', 'India', 180559, '2018-10-08', 
+    '6785HKrtXk', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR007', 'Vern', 'Scough', 'Browsezoom', 
+    '868-316-7947', 'vscough6@adobe.com', 
+    'London', 'UK', 'DA13 0ET', '2017-08-13', 
+    '55ZxLY6sNMAL', 0
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR008', 'Rogerio', 'Byrd', 'Avamba', 
+    '338-209-6286', 'rbyrd7@ted.com', 
+    'Newyork', 'USA', 32056, '2017-09-22', 
+    'UI5tfE', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR009', 'Kial', 'Slamaker', 'Browsetype', 
+    '884-129-8312', 'kslamaker8@angelfire.com', 
+    'Montreal', 'Canada', 'H2A 4C2', 
+    '2017-06-23', 'xjs7KfiC0oO8', 1
+  );
+/* INSERT QUERY */
+INSERT INTO organizer(
+  org_id, org_firstname, org_last_name, 
+  org_company, org_phone, org_email, 
+  org_city, org_country, org_zipcode, 
+  org_regdate, org_password, org_acc_status
+) 
+VALUES 
+  (
+    'OR010', 'Raimund', 'Hargerie', 'Kazio', 
+    '662-789-7196', 'rhargerie9@odnoklassniki.ru', 
+    'Toronto', 'Canada', 'L5C 3G1', '2015-12-07', 
+    'HAiZrn8', 1
+  );
+  
+/* INSERTING THE DATA TO ORGANIZER_BANKDETAILS TABLE */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB001', 'Bank of America', 651984722761, 
+    'SA06 81 WB 035', 'OR001'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB002', 'Japan Post Bank', 511118000000, 
+    'FI10 72 52 918', 'OR002'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB003', 'Royal Bank of Canada', 
+    370251277239, 'FR93 46 79 590', 
+    'OR003'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB004', 'UniCredit', 229384554478, 
+    'FI21 78 42 664', 'OR004'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB005', 'HSBC', 288517831717, 'LV25 WI ZL 316', 
+    'OR005'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB006', 'Citigroup Inc.', 347651108956, 
+    'GR64 61 22 429', 'OR006'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB007', 'BNP Paribas', 406784386195, 
+    'EE64 25 56 433', 'OR007'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB008', 'Mitsubishi UFJ Financial Group', 
+    465917663434, 'SM75 M8 28 926', 
+    'OR008'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB009', 'Bank of China', 525050940673, 
+    'MT82 AH MZ 252', 'OR009'
+  );
+/* INSERT QUERY */
+INSERT INTO organizer_bankdetails(
+  org_bankid, org_bank_name, org_account, 
+  org_swiftcode, org_id
+) 
+VALUES 
+  (
+    'OB010', 'Scotiabank', 584184217912, 
+    'EE64 07 89 096', 'OR010'
+  );
+    
+/* INSERTING THE DATA TO CAMPAIGN_LIST TABLE */
+
+INSERT INTO `campaign_list` (`camp_id`, `camp_post_date`, `camp_end_date`, `camp_descp`, `camp_status`, `camp_type`, `camp_goalamount`, `time_required`, `camp_priority`, `org_id`) 
+VALUES ('C001', '2019-12-24', '2020-02-08', 'Help support Sarah\'s college education', 0, 'monetary', 50000.00, NULL, 'high', 'OR001'),
+ ('C002', '2019-08-10', '2020-09-10', 'Fund Dan\'s kidney transplant surgery', 1, 'monetary', 95000.00, NULL, 'moderate', 'OR001'),
+ ('C003', '2020-02-29', '2020-12-31', 'Assist with covid-19 testing', 1, 'volunteer', NULL, 53, 'low', 'OR002'),
+ ('C004', '2019-09-28', '2020-04-18', 'Help fundraise medical supplies for a new community health center', 0, 'monetary', 63000.00, NULL, 'high', 'OR004'),
+ ('C005', '2019-12-06', '2020-09-30', 'Build a playground for a local school', 1, 'both', 22000.00, 150, 'moderate', 'OR003'),
+ ('C006', '2020-12-01', '2020-04-21', 'Help fund the Galapagos Tortoise breeding program', 0, 'monetary', 38000.00, NULL, 'moderate', 'OR005'),
+ ('C007', '2019-08-09', '2020-09-15', 'Donate to the World Health Organization\'s fund for neglected diseases', 1, 'monetary', 250000.00, NULL, 'low', 'OR005'),
+ ('C008', '2019-07-02', '2020-11-08', 'Help Annie rebuild her home', 0, 'both', 48500.00, 99, 'high', 'OR006'),
+ ('C009', '2019-11-21', '2020-12-23', 'Buy laptops for underfunded schools', 1, 'monetary', 12000.00, NULL, 'moderate', 'OR006'),
+ ('C010', '2019-10-18', '2020-09-30', 'Help fund Karen\'s rehabilitation therapy', 1, 'monetary', 16000.00, NULL, 'low', 'OR007'),
+ ('C011', '2019-03-08', '2020-06-25', 'Join the community trash pickup', 0, 'volunteer', NULL, 100, 'high', 'OR008'),
+ ('C012', '2019-11-14', '2020-11-25', 'Buy prosthetics for a military veteran', 1, 'monetary', 7000.00, NULL, 'low', 'OR008'),
+ ('C013', '2019-02-21', '2020-10-10', 'Volunteer at the Dawson\'s community center', 1, 'volunteer', NULL, 200, 'high', 'OR009'),
+ ('C014', '2020-02-26', '2020-09-28', 'Help John overcome cystic fibrosis', 1, 'monetary', 75000.00, NULL, 'low', 'OR009'),
+ ('C015', '2020-03-23', '2020-08-19', 'Help send aid and resources to those affected by COVID', 0, 'both', 1500.00, 100, 'moderate', 'OR010'); 
+
+/* INSERTING THE DATA TO DONOR_BANKDETAILS TABLE */
+INSERT INTO `donor_bankdetails` (`donor_bankid`, `donor_bankname`, `donor_account`, `donor_swiftcode`, `donor_id`) VALUES ('DB001', 'BALANZ CAPITAL VALORES SA', '833414898705', 'BAZVARBAXXX', 'D001'),
+ ('DB002', 'ISLAMI BANK BANGLADESH LTD', '651984722761', 'IBBLBDDH148', 'D002'),
+ ('DB003', 'MORGAN STANLEY CANADA LIMITED', '14706338419', 'MSCACATXXXX', 'D003'),
+ ('DB004', 'INDUSTRIAL AND COMMERCIAL BANK OF CHINA', '152402948164', 'ICBKCAT2CLR', 'D004'),
+ ('DB005', 'RBC ROYAL BANK (BAHAMAS) LIMITED', '288325176611', 'ROYCBSNSMAI', 'D005'),
+ ('DB006', 'ROYAL BANK OF CANADA, PARIS BRANCH', '893604198632', 'ROYCFRPBXXX', 'D006'),
+ ('DB007', 'GOLDMAN SACHS', '370834100776', 'GSCMUS33XXX', 'D007'),
+ ('DB008', 'HSBC SECURITIES CANADA', '954214950651', 'HSCICATTXXX', 'D008'),
+ ('DB009', 'HSBC BANK USA', '176453192430', 'MRMDUS33RTL', 'D009'),
+ ('DB010', 'YAMAGUCHI BANK, LTD', '674468520838', 'YMBKKR2PXXX', 'D010');
+ 
+  
+ /* INSERTING THE DATA TO CATEGORY TABLE */
+ 
+INSERT INTO `category` (`category_id`, `category_title`) VALUES
+('CAT001', 'Arts & Culture'),
+('CAT002', 'Education'),
+('CAT003', 'Environment'),
+('CAT004', 'Health & Medical'),
+('CAT005', 'Active Duty & Veterans'),
+('CAT006', 'Human Services'),
+('CAT007', 'Golbal'),
+('CAT008', 'Social Action'),
+('CAT009', 'Community'),
+('CAT010', 'Faith and Mission'),
+('CAT011', 'Miscellaneous'),
+('CAT012', 'Disaster Relief'),
+('CAT013', 'Animal and Humane');
+
+/* INSERTING THE DATA TO CAMPAIGN_CATEGORY TABLE */
+INSERT INTO `campaign_category` (`camp_id`, `category_id`) VALUES
+('C001', 'CAT002'),
+('C001', 'CAT006'),
+('C001', 'CAT008'),
+('C001', 'CAT009'),
+('C002', 'CAT004'),
+('C002', 'CAT009'),
+('C003', 'CAT004'),
+('C003', 'CAT007'),
+('C003', 'CAT008'),
+('C003', 'CAT009'),
+('C003', 'CAT012'),
+('C004', 'CAT006'),
+('C004', 'CAT009'),
+('C005', 'CAT002'),
+('C005', 'CAT008'),
+('C005', 'CAT009'),
+('C005', 'CAT013'),
+('C006', 'CAT003'),
+('C006', 'CAT004'),
+('C006', 'CAT007'),
+('C007', 'CAT004'),
+('C007', 'CAT007'),
+('C007', 'CAT012'),
+('C008', 'CAT006'),
+('C008', 'CAT009'),
+('C009', 'CAT001'),
+('C009', 'CAT002'),
+('C009', 'CAT010'),
+('C010', 'CAT004'),
+('C010', 'CAT006'),
+('C010', 'CAT010'),
+('C011', 'CAT003'),
+('C011', 'CAT011'),
+('C012', 'CAT005'),
+('C012', 'CAT011'),
+('C013', 'CAT006'),
+('C013', 'CAT009'),
+('C013', 'CAT010'),
+('C014', 'CAT004'),
+('C014', 'CAT008'),
+('C014', 'CAT013'),
+('C015', 'CAT004'),
+('C015', 'CAT005'),
+('C015', 'CAT006'),
+('C015', 'CAT007'),
+('C015', 'CAT009'),
+('C015', 'CAT012');
+
+
+/* INSERTING THE DATA TO VOLUNTEER_TRANSACTION TABLE */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V001', 10.34, 10.34, 1, 'D001', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V004', 7.13, 7.13, 1, 'D002', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V002', 8.98, 8.98, 1, 'D002', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V003', 11.37, 5.5, 0, 'D003', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V005', 11.22, 11.22, 1, 'D004', 'C008'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V016', 11.09, 11.09, 1, 'D005', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V006', 11.2, 11.2, 1, 'D005', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V011', 5.11, 5.11, 1, 'D006', 'C011'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V012', 2.75, 2.75, 1, 'D007', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V017', 6.17, 6.17, 1, 'D007', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V007', 2.54, 2.54, 1, 'D007', 'C015'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V008', 11.4, 11.4, 1, 'D008', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V018', 7.95, 7.95, 1, 'D008', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  ('V013', 9.6, 9.6, 1, 'D008', 'C008');
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V019', 10.29, 10.29, 1, 'D009', 'C003'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V014', 1.24, 1.24, 1, 'D009', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  ('V009', 9.81, 0, 0, 'D009', 'C008');
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V010', 5.31, 5.31, 1, 'D010', 'C005'
+  );
+/* INSERT QUERY */
+INSERT INTO volunteer_transaction(
+  volunteer_id, time_committed, time_worked, 
+  volunteer_status, donor_id, camp_id
+) 
+VALUES 
+  (
+    'V015', 9.87, 9.87, 1, 'D010', 'C013'
+  );
+
+ /* INSERTING THE DATA TO DONOR_TRANSACTION TABLE */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR001', '2019-12-31 10:53', '272-168-356', 
+    'mastercard', 'Completed', 1500, 
+    'C001', 'D007'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR002', '2019-11-15 03:52', '760-308-467', 
+    'discover', 'Completed', 4572.42, 
+    'C002', 'D008'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR003', '2020-02-04 07:26', '987-662-302', 
+    'BC Card', 'Rejected', 6820.68, 'C004', 
+    'D010'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR004', '2019-09-06 11:13', '148-226-865', 
+    'mastercard', 'Completed', 2000, 
+    'C005', 'D001'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR005', '2020-03-14 11:05', '630-075-489', 
+    'visa ', 'Completed', 8564.25, 'C006', 
+    'D002'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR006', '2019-11-12 21:53', '360-219-007', 
+    'visa-electron', 'Completed', 2378.19, 
+    'C012', 'D003'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR007', '2019-08-12 10:39', '355-738-542', 
+    'unionpay', 'Completed', 4500, 'C005', 
+    'D004'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR008', '2020-06-22 17:58', '274-120-196', 
+    'visa', 'Completed', 6657.79, 'C014', 
+    'D005'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR009', '2019-11-07 08:36', '207-189-159', 
+    'diners-club', 'Completed', 8472.36, 
+    'C010', 'D006'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR010', '2020-03-01 04:19', '695-078-566', 
+    'visa', 'Completed', 10000, 'C006', 
+    'D005'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR011', '2019-12-17 15:00', '842-095-184', 
+    'diners-club', 'Completed', 4000, 
+    'C012', 'D006'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR012', '2020-03-01 13:04', '447-402-469', 
+    'jcb', 'Completed', 9000, 'C010', 
+    'D010'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR013', '2020-03-11 13:23', '761-750-780', 
+    'unionpay', 'Rejected', 11000, 'C014', 
+    'D004'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR014', '2020-04-22 23:38', '806-504-859', 
+    'visa', 'Completed', 7185.25, 'C007', 
+    'D005'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR015', '2020-02-09 09:53', '914-537-387', 
+    'diners-club', 'Completed', 3500, 
+    'C009', 'D006'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR016', '2020-08-18 11:45', '581-518-410', 
+    'visa', 'Completed', 2500, 'C005', 
+    'D005'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR017', '2020-01-16 04:44', '073-105-051', 
+    'mastercard', 'Completed', 6575.24, 
+    'C006', 'D007'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR018', '2020-10-12 02:17', '623-145-513', 
+    'mastercard', 'Completed', 1500, 
+    'C001', 'D008'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR019', '2019-12-28 05:09', '323-495-476', 
+    'maestro', 'Rejected', 8514.5, 'C002', 
+    'D002'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR020', '2019-04-23 06:09', '679-870-417', 
+    'mastercard', 'Completed', 2500, 
+    'C001', 'D008'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR021', '2020-09-30 12:16', '149-641-971', 
+    'jcb', 'Completed', 9500, 'C001', 
+    'D010'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR022', '2020-12-09 08:10', '557-782-893', 
+    'mastercard', 'Completed', 4351.26, 
+    'C009', 'D008'
+  );
+/* INSERT QUERY */
+INSERT INTO donor_transaction(
+  trans_id, trans_timestamp, trans_paymentid, 
+  trans_paymentmode, trans_paymentstatus, 
+  trans_amount, camp_id, donor_id
+) 
+VALUES 
+  (
+    'TR023', '2020-08-17 20:54', '121-370-836', 
+    'jcb', 'Completed', 1000, 'C005', 
+    'D010'
+  );
+  
+  
+
+ /* INSERTING THE DATA TO PREFERENCE_CATEGORY TABLE */
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT013', 'D003');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT006', 'D004');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT013', 'D004');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT007', 'D005');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT013', 'D005');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT007', 'D007');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT008', 'D007');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT009', 'D008');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT010', 'D008');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT009', 'D009');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT010', 'D009');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT009', 'D010');
+
+INSERT INTO PREFERENCE_CATEGORY(CATEGORY_ID, DONOR_ID) 
+VALUES 
+  ('CAT011', 'D006');
+  
+  
+/* Overview
+/*The purpose of the database system is to maintain data that will be used to facilitate the exchange 
+of monetary funds and volunteer hours between donors and campaign organizers. The fundraising platform will 
+capture information on prospective donors, volunteers, and campaign organizers to allow for the matching of
+ donors with campaigns based on their preference categories.*/
+
+/* Description of the tables
+
+donor - Contains information needed to identify individuals or organizations registered as campaign donors
+organizer- Contains information needed to identify individuals or organizations registered as campaign organizers
+campaign_list - Contains information detailing individual fundraising campaigns
+category- Contains information on types/causes of campaigns used to categorize campaigns and direct donor preferences
+donation_transaction - Contains financial data on transactions made from donors to campaigns
+volunteer_transaction - Contains data on number for contribution made from donors to volunteering campaigns
+organizer_bank_details - Contains bank information necessary for the organizer to receive campaign funds
+donor_bankdetails -  Contains bank information necessary for the donor to pay for campaign funds
+campaign_category - Contains data information about the category related to different campaigns
+preference_category - Contains data information about the preference category related to different donors*/
+
+
+#QUERY LIST
+
+#QUERY 1: Campaigns and categories represented
+#QUERY 2: Total funds and volunteer hours processed through the database 
+#QUERY 3: Registered users vs. platform utilization
+#QUERY 4: Information on donors contributing both money and volunteer time to a campaign
+#QUERY 5: Donor campaign category preferences
+#QUERY 6: Donor campaign preferences: 40-60 age bracket 
+#QUERY 7: Average amount of funds donated to campaigns by category 
+#QUERY 8: Goal completion percentage for volunteer campaigns 
+#QUERY 9: Most popular donor transaction payment method
+#QUERY 10: Most commonly listed campaign category 
+#QUERY 11: Which gender (male or female) has volunteered more time?
+#QUERY 12: Name of donor who has donated the highest amount of money in total
+#QUERY 13: List of donors who completed donations transactions of a total value higher than the average amount donated across all transactions in our database
+#QUERY 14: List of all active campaigns along with the number of donors whose category preference matches the category to which the campaign belongs
+#QUERY 15: Time remaining before a campaign’s closing date 
+#QUERY 16: Estimation of number of additional volunteers needed for a campaign to reach its required time goal
+#QUERY 17: Estimation of donors needed to reach campaign target 
+#QUERY 18: Summary of total number of volunteers and total sum of money donated per country 
+#QUERY 19: Comparison of total amount of money donated vs. total hours volunteered for each donor
+#QUERY 20: Change in donor category preferences as income increases
+#QUERY 21: Campaign category that is most preferred by donors and the number of users who selected the category as a preference
+#QUERY 22: Setting campaign priority levels based on number of days left till campaign ends
+#QUERY 23: Match donors to new campaigns based on past preferences
+ 
+
+
+#QUERY 1: Campaigns and categories represented 
+#Begin with obtaining a broad overview of the Connect the Dots database. Since the core function of this database is to connect donors and organizers through campaigns, we began the analysis by examining the variety of campaigns available and the categories under which they fall. We find that campaigns belong to variety of different categories, including Arts & Culture, Environment, and Education. 
+
+SELECT 
+    CL.camp_descp, C.category_title
+FROM
+    category C,
+    campaign_list CL,
+    campaign_category
+WHERE
+    C.category_id = campaign_category.category_id
+        AND campaign_category.camp_id = CL.camp_id; 
+
+
+
+#QUERY 2: Total funds and volunteer hours processed through the database 
+#Continuing on with the broad overview, it is useful to find out how much money and how many hours have been processed through the database already. This will give a sense of how much value has been delivered to donors and campaign organizers thus far. We find that in total, over $2.4 million dollars has been donated through Connect the Dots, and over 3000 hours have been volunteered. 
+ 
+SELECT 
+    SUM(D.trans_amount) AS TOTAL_DONATED,
+    SUM(V.time_worked) AS TOTAL_VOLUNTEERED_HRS
+FROM
+    donor_transaction D,
+    volunteer_transaction V; 
+
+
+
+#QUERY 3: Registered users vs. platform utilization
+#It’s valuable to know how the platform is being utilized -- namely, how many of the donors with an account have yet to make a monetary donation. Fortunately, we find that only one donor with an account has not yet made a transaction. 
+
+SELECT 
+    donor.donor_id
+FROM
+    donor
+WHERE
+    NOT EXISTS( SELECT 
+            *
+        FROM
+            donor_transaction
+        WHERE
+            donor.donor_id = donor_transaction.donor_id); 
+
+
+
+#QUERY 4: Information on donors contributing both money and volunteer time to a campaign
+#It’s possible that a donor might not only want to donate time or money to a specific campaign, but might want to contribute both. We examined which donors fit this criteria, and found that two donors contributed both time and money to help build a playground for a local school. 
+
+SELECT 
+    T4.donor_id,
+    T4.donor_firstname,
+    T4.donor_lastname,
+    T4.donor_age,
+    T4.donor_gender,
+    T4.donor_country,
+    T3.camp_id,
+    T3.camp_descp,
+    T3.camp_type
+FROM
+    volunteer_transaction T1
+        JOIN
+    donor_transaction T2 ON T1.donor_id = T2.donor_id
+        JOIN
+    campaign_list T3 ON T1.camp_id = T3.camp_id
+        JOIN
+    donor T4 ON T1.donor_id = T4.donor_id
+WHERE
+    T1.camp_id = T2.camp_id; 
+
+
+   
+#QUERY 5: Donor campaign category preferences
+#A key function of the Connect the Dots crowdfunding platform is its ability to connect donors to campaigns through matching donor preferences to campaign categories. As such, we examined which campaign categories donors preferred to get an overview of donor preferences. We found that frequently, donors specified multiple preferences. 
+
+SELECT DISTINCT
+    T1.donor_id,
+    T4.donor_firstname,
+    T4.donor_lastname,
+    T3.category_id,
+    T3.category_title
+FROM
+    preference_category T1
+        JOIN
+    campaign_category T2 ON T1.category_id = T2.category_id
+        JOIN
+    category T3 ON T1.category_id = T3.category_id
+        JOIN
+    donor T4 ON T1.donor_id = T4.donor_id
+ORDER BY T1.donor_id; 
+
+
+
+#QUERY 6: Donor campaign preferences: 40-60 age bracket 
+#If we wanted to examine donor preferences on a deeper level, segmenting by age demographic can give us more insights into which ages prefer what. Here, we selected donor preferences for donors aged 40-60. 
+
+SELECT 
+    T2.category_title
+FROM
+    campaign_category T1
+        JOIN
+    category T2 ON T1.category_id = T2.category_id
+WHERE
+    camp_id IN (SELECT DISTINCT
+            camp_id
+        FROM
+            donor_transaction
+        WHERE
+            donor_id IN (SELECT 
+                    donor_id
+                FROM
+                    donor
+                WHERE
+                    donor_age > 40 AND donor_age < 60))
+GROUP BY T2.category_title; 
+
+
+
+#QUERY 7: Average amount of funds donated to campaigns by category 
+#Are certain campaign categories attract higher donation amounts? We examined the average donation while grouping by each campaign category and found that overall, environmental campaign causes drew the highest donations, averaging $25,000 dollars per donation. 
+
+SELECT 
+    T3.*, T4.avg_donation
+FROM
+    category T3
+        JOIN
+    (SELECT 
+        T1.category_id, AVG(total_donation) AS AVG_DONATION
+    FROM
+        campaign_category T1
+    RIGHT JOIN (SELECT 
+        camp_id, SUM(trans_amount) AS TOTAL_DONATION
+    FROM
+        donor_transaction
+    GROUP BY camp_id) T2 ON T1.camp_id = T2.camp_id
+    GROUP BY category_id) T4 ON T3.category_id = T4.category_id
+ORDER BY T4.avg_donation DESC; 
+
+
+
+
+#QUERY 8: Goal completion percentage for volunteer campaigns 
+#In order to display on the interface how close campaigns are to reaching their goal, it can be useful to calculate the ratio of time completed to time required for each campaign. Here, represented progress towards campaign goal completion as a percentage, and found that out of all the volunteers, none were yet completed. The closest campaign to completion was a call for COVID testing volunteers, at 98%. 
+
+SELECT 
+    T1.*,
+    T2.time_required,
+    CONCAT((time_completed / T2.time_required * 100),
+            '%') AS PERCENT_FINISHED,
+    T2.camp_descp
+FROM
+    (SELECT 
+        camp_id, SUM(time_worked) AS TIME_COMPLETED
+    FROM
+        volunteer_transaction
+    GROUP BY camp_id) T1
+        LEFT JOIN
+    campaign_list T2 ON T1.camp_id = T2.camp_id
+ORDER BY T1.camp_id; 
+
+
+
+
+#QUERY 9: Most popular donor transaction payment method
+#What payment method is most popular amongst donors? Knowing this information might be used as rationale to create new platform functionalities such as an easy checkout option. We find that the most popular checkout methods are Mastercard (26% of transactions), followed by Visa (~22% of transactions). 
+
+CREATE temporary TABLE payment_mode 
+  SELECT trans_paymentmode, 
+         Count(trans_paymentmode) AS NUMBER_OF_USER 
+  FROM   donor_transaction 
+  GROUP  BY trans_paymentmode 
+  ORDER  BY number_of_user DESC; 
+
+ALTER TABLE payment_mode 
+  ADD percent VARCHAR(10); 
+
+UPDATE payment_mode 
+SET    percent = Round(number_of_user / 23 * 100, 2); 
+
+SELECT trans_paymentmode, NUMBER_OF_USER, Round(number_of_user / 23 * 100, 2) AS percent
+FROM payment_mode;
+
+#QUERY 10: Most commonly listed campaign category 
+#Which campaign category is most selected by campaign organizers? By selecting the number of campaigns and grouping them by the categories they identify under, we find that the highest number of campaigns have identified themselves under the “community” category.
+
+SELECT 
+    category_id,
+    category_title,
+    MAX(number_of_campaigns) AS MAX_CAMPAIGN_NUMBER
+FROM
+    (SELECT 
+        C.category_id,
+            C.category_title,
+            COUNT(CC.camp_id) AS NUMBER_OF_CAMPAIGNS
+    FROM
+        category AS C
+    INNER JOIN campaign_category AS CC ON C.category_id = CC.category_id
+    GROUP BY C.category_id
+    ORDER BY number_of_campaigns DESC) AS NUMBER_OF_CAMPAIGNS_TABLE; 
+
+
+
+
+#QUERY 11: Which gender (male or female) has volunteered more time?
+#We are interested in seeing whether a particular gender (male or female) donates more time (volunteering) than the other gender. Our data shows that Men have volunteered more hours than Women. Overall, Men have volunteered a total of 93 hours, while Women have volunteered a total of 59 hours.
+
+SELECT donor_gender, 
+       Sum(time_committed) AS total_time_committed 
+FROM   donor D 
+       INNER JOIN volunteer_transaction V 
+               ON D.donor_id = V.donor_id 
+GROUP  BY donor_gender 
+ORDER  BY total_time_committed DESC ;
+
+
+
+#QUERY 12: Name of the donor who has donated the highest amount of money in total
+#Donors who come across our platform tend to be very generous. We are curious to see which donor has donated the largest overall sum of money since they registered with our platform. Clim Risborough has donated $26,343.04!
+
+SELECT donor_id, 
+       donor_firstname, 
+       donor_lastname, 
+       Max(total_transaction_amount) AS MAX_AMOUNT 
+FROM   (SELECT DT.donor_id, 
+               D.donor_firstname, 
+               D.donor_lastname, 
+               Sum(DT.trans_amount) AS TOTAL_TRANSACTION_AMOUNT 
+        FROM   donor_transaction AS DT 
+               INNER JOIN donor AS D 
+                       ON DT.donor_id = D.donor_id 
+        WHERE  DT.trans_paymentstatus = 'COMPLETED' 
+        GROUP  BY DT.donor_id 
+        ORDER  BY total_transaction_amount DESC) AS 
+       TOTAL_TRANSACTION_AMOUNT_TABLE; 
+
+
+
+#QUERY 13: List of donors who completed donations transactions of a total value higher than the average amount donated across all transactions 
+#We have calculated that the average amount of money that has been donated by our donors is $5,012.84. This query will filter and order the data to show us a list of the donors who have donated more than this average. We may be able to use this information to send thank you cards to our donors for their generosity.
+
+SELECT 
+    donor.donor_id,
+    CONCAT(donor_firstname, ' ', donor_lastname) AS DONOR_NAME,
+    SUM(trans_amount) AS SUM_AMOUNT,
+    (SELECT 
+            AVG(trans_amount)
+        FROM
+            donor_transaction
+        WHERE
+            trans_paymentstatus = 'COMPLETED') AS AVERAGE_AMOUNT
+FROM
+    donor_transaction,
+    donor
+WHERE
+    donor.donor_id = donor_transaction.donor_id
+        AND trans_paymentstatus = 'COMPLETED'
+GROUP BY donor_transaction.donor_id
+HAVING SUM(trans_amount) > average_amount
+ORDER BY sum_amount DESC; 
+
+
+
+#QUERY 14: List of all the active campaigns along with the number of donors whose category preference matches the category to which the campaign belongs Our overarching aim is to match campaigns to the right donors according to their category preferences. This query will show us how many donors would likely be interested in donating to a certain campaign based on if the category(ies)  the campaign is classified in matches the category preference(s) of a donor. This information will help us gauge how much traffic a certain campaign may be getting. For example, campaigns C011 and C012 only have 1 match, so they may not receive as many donations as C005 which has 7 donor matches.
+
+
+SELECT 
+    campaign_list.camp_id,
+    camp_descp,
+    COUNT(DISTINCT donor_id) AS NUMBER_OF_PREFERENCE
+FROM
+    campaign_list,
+    campaign_category,
+    preference_category
+WHERE
+    campaign_category.category_id = preference_category.category_id
+        AND campaign_list.camp_id = campaign_category.camp_id
+GROUP BY campaign_list.camp_id
+ORDER BY campaign_list.camp_id ASC; 
+
+
+
+#QUERY 15: Time remaining before a campaign’s closing date 
+#This query calculates the total amount of time remaining for a campaign before it closes, based on the difference between the current date and the campaign’s indicated end date. We will use this information to dictate which campaigns we boost on our homepage. For example C014 has only 13 days left, so we might boost it with more urgency that C003 which has 107 days left. 
+
+SELECT 
+    camp_id,
+    camp_descp,
+    camp_type,
+    DATEDIFF(camp_end_date, SYSDATE()) AS DAYS
+FROM
+    campaign_list
+WHERE
+    camp_status = 1
+ORDER BY days DESC; 
+
+
+
+
+#QUERY 16: Estimation of number of additional volunteers needed for a campaign to reach its required time goal
+#An organizer may want to estimate how many more volunteers they need in order to reach their campaign goal. To obtain this insight, we will calculate the average amount of time currently being donated by the volunteers who have committed to their campaign. Based on this average time value, we will determine how many more volunteers will be needed to complete the remaining hours, with the assumption that future volunteers commit to a similar amount of time as the average time. 
+
+SELECT 
+    campaign_list.camp_id,
+    CEIL((campaign_list.time_required - SUM(time_worked)) / AVG(time_worked)) AS VOL_STILL_REQUIRED,
+    COUNT(volunteer_id) AS NUM_VOLUNTEERS
+FROM
+    campaign_list,
+    volunteer_transaction
+WHERE
+    campaign_list.camp_id = volunteer_transaction.camp_id
+GROUP BY campaign_list.camp_id; 
+
+
+
+
+#QUERY 17: Estimation of donors needed to reach campaign target 
+#Based on the previous data stored in the database, we can conduct some useful predictive analysis which will help estimate trends for current and future campaigns. In this instance, we can predict how many donors are still needed for each campaign for it to reach its goal by looking at a campaign’s donation history. By looking at the average donation amount per user for each campaign, we can estimate how many more donors are needed to fulfill that campaign’s goal with the assumption that future donors donate similar amounts. 
+
+SELECT 
+    campaign_list.camp_id,
+    camp_descp,
+    CEIL((camp_goalamount - SUM(trans_amount)) / AVG(trans_amount)) AS MORE_DONOR
+FROM
+    donor_transaction,
+    campaign_list
+WHERE
+    trans_paymentstatus = 'COMPLETED'
+        AND campaign_list.camp_id = donor_transaction.camp_id
+        AND camp_status = 1
+GROUP BY donor_transaction.camp_id; 
+
+
+
+#QUERY 18: Summary of the total number of volunteers and the total sum of money donated per country 
+#We are interested in seeing the different donation patterns based on country. This information will be useful when designing our marketing strategies. We can see that the Bahamas ranks the highest in terms of total amount of money donated, while Canada ranks the highest for total number of volunteers. In the future, we could enhance our marketing in Argentina in order to attract more active donors and volunteers from the country.. 
+
+SELECT DISTINCT
+    donor_country,
+    SUM(trans_amount) AS DONATION_AMOUNT,
+    COUNT(volunteer_transaction.volunteer_id) AS NUM_VOLUNTEER
+FROM
+    volunteer_transaction,
+    donor,
+    donor_transaction
+WHERE
+    volunteer_transaction.donor_id = donor.donor_id
+        AND donor_transaction.donor_id = donor.donor_id
+GROUP BY donor_country
+ORDER BY donation_amount DESC; 
+
+
+
+#QUERY 19: Comparison of total amount of money donated vs. total hours volunteered for each donor
+#The output of this query is useful in giving us an overview of the donor activity on our site. With this information, we can gauge our donors’ willingness to donate their time and/or money. For instance, we can see that donor D009 has donated quite a few hours (11hrs), but has not donated any money.
+
+SELECT 
+    T1.donor_id,
+    T1.donor_firstname,
+    T1.donor_lastname,
+    T2.total_work_done,
+    T3.total_donation
+FROM
+    donor T1
+        LEFT JOIN
+    (SELECT 
+        donor_id, SUM(time_worked) AS TOTAL_WORK_DONE
+    FROM
+        volunteer_transaction
+    GROUP BY donor_id) T2 ON T1.donor_id = T2.donor_id
+        LEFT JOIN
+    (SELECT 
+        donor_id, SUM(trans_amount) AS TOTAL_DONATION
+    FROM
+        donor_transaction
+    GROUP BY donor_id) T3 ON T1.donor_id = T3.donor_id; 
+
+
+
+#QUERY 20: Change in donor category preferences as income increases
+#This query will provide us with information on which categories our donors prefer, given their income bracket. We can see that “community” and “faith & mission” are important to our wealthiest donors ($200k+) while our donors who fall within the lower income bracket (0~$100k) are more drawn to “arts & culture” and “education” campaigns. 
+
+SELECT 
+    c.category_id,
+    c.category_title AS CATEGORY_NAME,
+    COUNT(CASE
+        WHEN
+            donor_income < 100000
+                AND donor_income > 0
+        THEN
+            d.donor_id
+    END) AS '0 ~ 100k',
+    COUNT(CASE
+        WHEN
+            donor_income >= 100000
+                AND donor_income < 200000
+        THEN
+            d.donor_id
+    END) AS '100k ~ 200k',
+    COUNT(CASE
+        WHEN donor_income >= 200000 THEN d.donor_id
+    END) AS 'above 200k'
+FROM
+    category c
+        LEFT JOIN
+    preference_category pc ON c.category_id = pc.category_id
+        JOIN
+    donor d ON pc.donor_id = d.donor_id
+GROUP BY c.category_id
+ORDER BY c.category_id ASC; 
+
+
+#QUERY 21: Campaign category that is most preferred by donors and the number of users who selected the category as a preference
+#We would like to find out the campaign category which was chosen most among donors as their preference, as well as the number of donors who actually chose that category. With this information, we will be able to better customize the campaigns that we display on our homepage and showcase campaigns from the top category that more donors would be attracted to. 
+#We find that the category that donors prefer the most is “community”. 3 donors have listed this as their preference, so we will aim to showcase more community-driven campaigns on our homepage.
+
+SELECT 
+    category_id,
+    category_title,
+    MAX(number_of_donors) AS MAX_DONOR_NUMBER
+FROM
+    (SELECT 
+        C.category_id,
+            C.category_title,
+            COUNT(PC.donor_id) AS NUMBER_OF_DONORS
+    FROM
+        category AS C
+    INNER JOIN preference_category AS PC ON C.category_id = PC.category_id
+    GROUP BY C.category_id
+    ORDER BY number_of_donors DESC) AS NUMBER_OF_DONORS_TABLE; 
+
+
+
+
+#QUERY 22: Setting campaign priority levels based on number of days left till campaign ends
+#A key service provided by Connect the Dots is its ability to give campaigns extra visibility based on priority factors such as time left in a campaign or amount of funds still needed. Here, we can assign campaigns different priorities based on the difference between the current date and the campaign end date (i.e. the amount of time left before a campaign ends). We assign campaigns with more than 50 days left a “low” priority, campaigns with 20-50 days left a “moderate” priority, and campaigns with less than 20 days left a “high” priority. As campaigns near their end date, their priorities will automatically shift. This is important as it allows us to increase advertising for high priority campaigns, such as by placing them on the front page of our website.  
+
+SELECT 
+    camp_id,
+    camp_descp,
+    camp_type,
+    DATEDIFF(camp_end_date, SYSDATE()) AS DAYS_LEFT,
+    CASE
+        WHEN
+            (DATEDIFF(camp_end_date, SYSDATE()) > 0
+                AND DATEDIFF(camp_end_date, SYSDATE()) <= 20)
+        THEN
+            'HIGH'
+        WHEN (DATEDIFF(camp_end_date, SYSDATE()) < 0) THEN 'CAMPAIGN_ENDED'
+        WHEN
+            (DATEDIFF(camp_end_date, SYSDATE()) > 20
+                AND DATEDIFF(camp_end_date, SYSDATE()) < 50)
+        THEN
+            'MODERATE'
+        WHEN DATEDIFF(camp_end_date, SYSDATE()) >= 50 THEN 'LOW'
+        ELSE 'ERROR'
+    END AS PRIORITY
+FROM
+    campaign_list
+WHERE
+    camp_status = 1; 
+
+
+
+
+#QUERY 23: Match donors to new campaigns based on past donations
+#In order to better match donors with causes that donors are passionate about donating to, it can be vital to use past donation history in order to make future recommendations to donors. This targeted recommendation system can be useful as it both ensures that campaigns get increased visibility and exposure, while ensuring that donors are not inundated with campaigns they may find irrelevant. Targeted advertising will become especially important as the database grows and the number of campaigns and donation categories increases. Subsequently, we used a donor’s past donations (both monetary and voluntary) to match them to new campaigns they might be interested in and previously had not donated to, based on their category preferences. 
+
+
+SELECT 
+    X.DONOR_ID,
+    X.DONOR_FIRSTNAME,
+    Y.CATEGORY_TITLE,
+    X.CATEGORY_ID AS INTERESTED_IN,
+    X.CAMP_ID AS RECOMMEND_CAMP_ID,
+    Z.CAMP_DESCP AS RECOMMEND_CAMP_DESCP,
+    Z.CAMP_END_DATE
+FROM
+    (SELECT 
+        T4.CAMP_ID, T3.*, CONCAT(DONOR_ID, CAMP_ID) AS COMBINATION
+    FROM
+        (SELECT 
+        T2.*, T1.DONOR_FIRSTNAME
+    FROM
+        PREFERENCE_CATEGORY T2
+    JOIN DONOR T1 ON T2.DONOR_ID = T1.DONOR_ID) T3
+    JOIN CAMPAIGN_CATEGORY T4 ON T3.CATEGORY_ID = T4.CATEGORY_ID
+    WHERE
+        CONCAT(DONOR_ID, CAMP_ID) NOT IN (SELECT 
+                CONCAT(A.DONOR_ID, B.CAMP_ID)
+            FROM
+                DONOR A
+            JOIN DONOR_TRANSACTION B ON A.DONOR_ID = B.DONOR_ID UNION SELECT 
+                CONCAT(C.DONOR_ID, D.CAMP_ID)
+            FROM
+                DONOR C
+            JOIN VOLUNTEER_TRANSACTION D ON C.DONOR_ID = D.DONOR_ID)) X
+        JOIN
+    CATEGORY Y ON X.CATEGORY_ID = Y.CATEGORY_ID
+        JOIN
+    CAMPAIGN_LIST Z ON Z.CAMP_ID = X.CAMP_ID
+ORDER BY X.DONOR_ID , X.CATEGORY_ID , X.CAMP_ID;
