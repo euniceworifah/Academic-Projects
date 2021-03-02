@@ -15,3 +15,5 @@ Tools: Python (Jupyter Notebook)
 Techniques: 
 - ***Data Scraping:*** BeautifulSoup
 - ***Data Pre-Processing:*** Expand contracted words, Tokenization, Lowercasing, Word Replacement, Removing Punctuations, Removing Stopwords, POS Tagging, Lemmatization, FreqDist, Co-occurrence Matrix, Lift Values, MDS Plot
+
+![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/Text%20Analytics%20-%20Lift%20Value%20Analysis/Images/MDSplot.png)
