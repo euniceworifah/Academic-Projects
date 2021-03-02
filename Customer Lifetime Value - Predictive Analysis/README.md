@@ -7,4 +7,5 @@ Techniques:
 - ***Data Exploration:*** pandas_profiling, matplotlib, seaborn, correlation
 - ***Data Pre-Processing:*** train_test split (stratified), imputing null values, Ordinal Encoder, One-Hot Encoder, TransformerMixin, StandarScaler, ColumnTransformer, Pipeline
 - ***Modelling:*** LinearRegression, Random Forest, SVR
-- ***Parameter Tuning:*** cross_val_score, GridSearchCV, RandomSearchCV    
+- ***Parameter Tuning:*** cross_val_score, GridSearchCV, RandomSearchCV
+
