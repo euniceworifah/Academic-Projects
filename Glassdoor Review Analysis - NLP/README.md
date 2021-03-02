@@ -15,9 +15,9 @@ The insights we will derive are:
 - Difference in sentiments across departments within each FAANG company
 
 
-Tools: Python (Jupyter Notebook/Google Collab), Tableau
+**Tools**: Python (Jupyter Notebook/Google Collab), Tableau
 
-Techniques:
+**Techniques:**
 - ***Data Acquisition:*** Scraping data from Glassdoor with a script that uses python, json and chromedriver
 - ***Data Pre-Processing:*** Remove contractions, Tokenization, Remove punctuations, Remove Stopwards, POS Tagging (wordnet), Lemmatization
 - ***Topic Modelling:*** Document Term Matrix, LDA Model, visualization using pyLDAvis
