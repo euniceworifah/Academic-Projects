@@ -16,5 +16,5 @@ Data Source: Kaggle
 Tools: RStudio
 
 Techniques: 
-***Variable Exploration:*** ggplot2, corrplot
-***Modelling:*** Simple Tree, Random Forest, Gradient Boosting, Logistic Regression, Variable Importance. (Packages used: tree, rpart.plot, randomForest, gbm, caret, stargazer,rms, ggfortify)
+- ***Variable Exploration:*** ggplot2, corrplot
+- ***Modelling:*** Simple Tree, Random Forest, Gradient Boosting, Logistic Regression, Variable Importance. (Packages used: tree, rpart.plot, randomForest, gbm, caret, stargazer,rms, ggfortify)
