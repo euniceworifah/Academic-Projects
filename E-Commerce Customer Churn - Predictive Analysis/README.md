@@ -26,4 +26,5 @@ Techniques:
 ![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/Pre-processing.PNG)
 
 - ***Causal Inference (DoWhy):***
+
 ![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/causal_model.png)
