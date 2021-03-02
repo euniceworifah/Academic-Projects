@@ -17,3 +17,6 @@ Data Source: Kaggle (https://www.kaggle.com/ankitverma2010/ecommerce-customer-ch
 
 <img src="images/Pre-processing.png" width="800" height="400">
 
+![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/Pre-processing.PNG)
+
+E-Commerce Customer Churn - Predictive Analysis/images/Pre-processing.PNG
