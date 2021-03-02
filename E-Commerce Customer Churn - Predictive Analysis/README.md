@@ -15,3 +15,5 @@ For this project, our objective is to:
 
 Data Source: Kaggle (https://www.kaggle.com/ankitverma2010/ecommerce-customer-churn-analysis-and-prediction)
 
+<img src="images/Pre-processing.png" width="800" height="400">
+
