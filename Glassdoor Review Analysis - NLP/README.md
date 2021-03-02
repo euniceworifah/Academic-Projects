@@ -10,7 +10,7 @@ We are creating atool to help MMA students understand which company is better to
 **OBJECTIVE:**
 The insights we will derive are:
 - Top 5 key topics that employees use to rate their experience at a company
--    Ranking each company based on their performance withinthese topics
+-- Ranking each company based on their performance withinthese topics
 - Difference in sentiments of former employees vs current employees
 - Difference in sentiments across FAANG companies pre-and post-COVID
 - Difference in sentiments across departments within each FAANG company
