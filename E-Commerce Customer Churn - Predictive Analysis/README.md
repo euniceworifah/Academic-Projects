@@ -18,7 +18,12 @@ Data Source: Kaggle (https://www.kaggle.com/ankitverma2010/ecommerce-customer-ch
 Tools: Python (Jupyter Notebook)
 Techniques:
 - ***Data Exploration:*** - pandas_profiling, missingno, correlation, matplotlib, seaborn, PCA
+
+![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/pandasprofile.PNG)
+
 - ***Data Preparation, Modelling and Parameter Tuning:***
 
 ![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/Pre-processing.PNG)
 
+- ***Causal Inference (DoWhy):***
+![Alt text](https://github.com/euniceworifah/Academic-Projects/blob/main/E-Commerce%20Customer%20Churn%20-%20Predictive%20Analysis/images/causal_model.png)
